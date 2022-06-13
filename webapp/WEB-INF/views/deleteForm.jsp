@@ -10,7 +10,6 @@
 </head>
 <body>
 	<form action="delete" method="get">
-		<input type = "hidden" name = "action" value ="delete">
 		비밀번호<input type="password" name="password">
 		<input type="hidden" name="no" value="${param.no }">
 		<button type="submit">확인</button>
