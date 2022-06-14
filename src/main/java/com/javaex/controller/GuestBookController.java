@@ -2,17 +2,26 @@ package com.javaex.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.javaex.dao.GuestBookDao;
+import com.javaex.service.GuestBookService;
 import com.javaex.vo.GuestBookVo;
 
 @Controller
 public class GuestBookController {
+	
+	//필드
+	@Autowired
+	private GuestBookService guestbookService;
+	
+	//메소드 일반
+	
+	
 	
 	//addList
 	@RequestMapping(value= "addList", method= {RequestMethod.GET, RequestMethod.POST})
@@ -21,8 +30,8 @@ public class GuestBookController {
 		System.out.println("addList 진입");
 		
 		//리스트 만들기
-		GuestBookDao guestbookDao = new GuestBookDao();
-		List<GuestBookVo> guestbookList = guestbookDao.getGuestBookList();
+		List<GuestBookVo> guestbookList = guestbookService.getGuestBookList();
+		System.out.println(guestbookList);
 		
 		//ds통해서 attribute로 리스트 보내기
 		model.addAttribute("guestbookList", guestbookList);
@@ -31,16 +40,14 @@ public class GuestBookController {
 		return "addList";
 	}
 	
+	
 	//add
 	@RequestMapping(value= "add", method= {RequestMethod.GET, RequestMethod.POST})
 	public String add(GuestBookVo guestbookVo) {
 		System.out.println("add 진입");
 		
-		//Dao로 넣기
-		GuestBookDao guestbookDao = new GuestBookDao();
-		guestbookDao.insert(guestbookVo);
-		
-		System.out.println(guestbookVo);
+		//service로 넣기
+		guestbookService.insert(guestbookVo);
 		
 		//리다이렉트
 		return "redirect:/addList";
@@ -64,9 +71,8 @@ public class GuestBookController {
 	public String delete(GuestBookVo guestbookVo) {
 		System.out.println("delete 진입");
 		
-		//Dao로 삭제하기
-		GuestBookDao guestbookDao = new GuestBookDao();
-		guestbookDao.delete(guestbookVo);
+		//service로 삭제하기
+		guestbookService.delete(guestbookVo);
 		
 		
 		return "redirect:/addList";
