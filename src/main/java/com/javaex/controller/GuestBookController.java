@@ -28,7 +28,7 @@ public class GuestBookController {
 		model.addAttribute("guestbookList", guestbookList);
 		
 		
-		return "/WEB-INF/views/addList.jsp";
+		return "addList";
 	}
 	
 	//add
@@ -39,6 +39,8 @@ public class GuestBookController {
 		//Dao로 넣기
 		GuestBookDao guestbookDao = new GuestBookDao();
 		guestbookDao.insert(guestbookVo);
+		
+		System.out.println(guestbookVo);
 		
 		//리다이렉트
 		return "redirect:/addList";
@@ -53,7 +55,7 @@ public class GuestBookController {
 		//no 보내주기
 		model.addAttribute(no);
 		
-		return "/WEB-INF/views/deleteForm.jsp";
+		return "deleteForm";
 	}
 	
 	

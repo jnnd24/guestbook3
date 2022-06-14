@@ -28,7 +28,7 @@
 			<table  border="1">
 				<tr>
 					<td>${gbList.no }</td>
-					<td>${gbLIst.name }</td>
+					<td>${gbList.name }</td>
 					<td>${gbList.regDate }</td>
 					<td><a href="./deleteForm?no=${gbList.no }">삭제</a></td>
 				</tr>
